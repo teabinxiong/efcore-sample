@@ -6,7 +6,7 @@ using System.Text;
 
 namespace EFCore5WebApp.Core.Entities
 {
-    [Table("Persons", Schema = "dbo")]
+    [Table("Person", Schema = "dbo")]
     public class Person
     {
         public int Id { get; set; }
