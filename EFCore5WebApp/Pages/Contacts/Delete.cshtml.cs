@@ -29,7 +29,7 @@ namespace EFCore5WebApp.Pages.Contacts
                 return NotFound();
             }
 
-            Person = await _context.Persons.FirstOrDefaultAsync(m => m.Id == id);
+            Person = await _context.Persons.Include(nameof(Person.Addresses)).FirstOrDefaultAsync(m => m.Id == id);
 
             if (Person == null)
             {
@@ -45,7 +45,7 @@ namespace EFCore5WebApp.Pages.Contacts
                 return NotFound();
             }
 
-            Person = await _context.Persons.FindAsync(id);
+            Person = await _context.Persons.Include(nameof(Person.Addresses)).SingleOrDefaultAsync(x => x.Id == id);
 
             if (Person != null)
             {

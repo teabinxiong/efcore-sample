@@ -44,7 +44,64 @@
             @Html.DisplayFor(model => model.Person.Age)
         </dd>
     </dl>
-    
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Person.Addresses.
+                    First().AddressLine1)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Person.Addresses.
+                    First().AddressLine2)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Person.Addresses.
+                    First().City)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Person.Addresses.
+                    First().State)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Person.Addresses.
+                    First().Country)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Person.Addresses.
+                    First().ZipCode)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Person.Addresses)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AddressLine1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AddressLine2)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.State)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Country)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ZipCode)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
     <form method="post">
         <input type="hidden" asp-for="Person.Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |

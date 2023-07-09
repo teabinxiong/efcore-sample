@@ -10,9 +10,9 @@
 
 <h4>Person</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
+<form method="post">
+    <div class="row">
+        <div class="col-md-4">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Person.Id" />
             <div class="form-group">
@@ -40,17 +40,67 @@
                 <input asp-for="Person.Age" class="form-control" />
                 <span asp-validation-for="Person.Age" class="text-danger"></span>
             </div>
+        </div>
+        <div class="col-md-4">
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <label asp-for="Person.Addresses[0].AddressLine1"
+                       class="control-label"></label>
+                <input asp-for="Person.Addresses[0].AddressLine1"
+                       class="form-control" />
+                <span asp-validation-for="Person.Addresses[0].AddressLine1"
+                      class="text-danger"></span>
             </div>
-        </form>
+            <div class="form-group">
+                <label asp-for="Person.Addresses[0].AddressLine2"
+                       class="control-label"></label>
+                <input asp-for="Person.Addresses[0].AddressLine2"
+                       class="form-control" />
+                <span asp-validation-for="Person.Addresses[0].AddressLine2"
+                      class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Person.Addresses[0].City" class="control-label"></label>
+                <input asp-for="Person.Addresses[0].City" class="form-control" />
+                <span asp-validation-for="Person.Addresses[0].City"
+                      class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Person.Addresses[0].State" class="control-label"></label>
+                <select asp-for="Person.Addresses[0].State" class="form-control" asp-items="Model.States"></select>
+                <span asp-validation-for="Person.Addresses[0].State"
+                      class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Person.Addresses[0].Country"
+                       class="control-label"></label>
+                <select asp-for="Person.Addresses[0].Country" class="form-control" asp-items="Model.Countries"></select>
+                <span asp-validation-for="Person.Addresses[0].Country"
+                      class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Person.Addresses[0].ZipCode"
+                       class="control-label"></label>
+                <input asp-for="Person.Addresses[0].ZipCode" class="form-control" />
+                <span asp-validation-for="Person.Addresses[0].ZipCode"
+                      class="text-danger"></span>
+            </div>
+            @Html.HiddenFor(m => m.Person.Addresses[0].Id)
+            @Html.HiddenFor(m => m.Person.Addresses[0].Person)
+            @Html.HiddenFor(m => m.Person.Addresses[0].PersonId)
+        </div>
     </div>
-</div>
-
+    <div>
+        <div class="form-group">
+            <input type="submit" value="Edit" class="btn btn-primary" />
+        </div>
+    </div>
+</form>
 <div>
     <a asp-page="./Index">Back to List</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

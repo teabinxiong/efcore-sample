@@ -23,6 +23,12 @@ namespace EFCore5WebApp.Pages.Contacts
         [BindProperty]
         public Person Person { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public List<SelectListItem> States { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public List<SelectListItem> Countries { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -30,12 +36,42 @@ namespace EFCore5WebApp.Pages.Contacts
                 return NotFound();
             }
 
-            Person = await _context.Persons.FirstOrDefaultAsync(m => m.Id == id);
+            Person = await _context.Persons.Include("Addresses").FirstOrDefaultAsync(m => m.Id == id);
 
             if (Person == null)
             {
                 return NotFound();
             }
+
+            var lookups = _context.LookUps.Where(x => new List<LookUpType>
+            {
+                LookUpType.State, LookUpType.Country
+            }.Contains(x.LookUpType)).ToList();
+
+            States = lookups.Where(x => x.LookUpType == LookUpType.State).Select(x => new SelectListItem
+            {
+                Text = x.Description,
+                Value = x.Code
+            }).ToList();
+
+            Countries = lookups.Where(x => x.LookUpType == LookUpType.Country).Select(x => new SelectListItem
+            {
+                Text = x.Description,
+                Value = x.Code
+            }).ToList();
+
+            States.Insert(0, new SelectListItem
+            {
+                Text = "Select State",
+                Value = string.Empty
+            });
+
+            Countries.Insert(0, new SelectListItem
+            {
+                Text = "Select Country",
+                Value = string.Empty
+            });
+
             return Page();
         }
 
@@ -43,16 +79,26 @@ namespace EFCore5WebApp.Pages.Contacts
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+
             if (!ModelState.IsValid)
             {
+                var errors = ModelState.Select(x => x.Value.Errors)
+                            .Where(y => y.Count > 0)
+                            .ToList();
                 return Page();
             }
+           
 
             _context.Attach(Person).State = EntityState.Modified;
 
+
+            var address = _context.Addresses.ToList();
+            address = Person.Addresses;
+            _context.Addresses.Update(address[0]);
+
             try
             {
-                await _context.SaveChangesAsync();
+               await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {

@@ -32,7 +32,9 @@ namespace EFCore5WebApp.Core.Entities
         [Display(Name = "Zip Code")]
         [Required]
         public string ZipCode { get; set; }
+
         public int PersonId { get; set; }
-        public Person Person { get; set; }
+
+        public Person? Person { get; set; }
     }
 }
