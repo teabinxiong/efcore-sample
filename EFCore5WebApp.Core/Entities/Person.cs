@@ -13,19 +13,24 @@ namespace EFCore5WebApp.Core.Entities
 
         [Required]
         [MaxLength(255)]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
         [Required]
         [MaxLength(255)]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         [Required]
+        [Display(Name = "Email")]
         public string EmailAddress { get; set; }
         public List<Address> Addresses { get; set; } = new List<Address>();
 
         [NotMapped]
+        [Display(Name = "Name")]
         public string FullName => $"{FirstName} {LastName}";
 
+        [Display(Name = "Created On")]
         public DateTime CreatedOn { get; set; }
 
         public List<Person> Parents { get; set; } = new List<Person>();
