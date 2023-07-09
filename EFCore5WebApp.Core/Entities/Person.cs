@@ -27,5 +27,8 @@ namespace EFCore5WebApp.Core.Entities
         public string FullName => $"{FirstName} {LastName}";
 
         public DateTime CreatedOn { get; set; }
+
+        public List<Person> Parents { get; set; } = new List<Person>();
+        public List<Person> Children { get; set; } = new List<Person>();
     }
 }
