@@ -30,5 +30,6 @@ namespace EFCore5WebApp.Core.Entities
 
         public List<Person> Parents { get; set; } = new List<Person>();
         public List<Person> Children { get; set; } = new List<Person>();
+        public int Age { get; set; }
     }
 }
