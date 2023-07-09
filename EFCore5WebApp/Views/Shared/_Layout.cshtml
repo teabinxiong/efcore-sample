@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    var userId = UserManager.GetUserId(User);
+    var user = await UserManager.FindByIdAsync(userId);
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -25,9 +33,14 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Contacts/Index">Contacts</a>
-                        </li>
+                        @if (SignInManager.IsSignedIn(User) && 
+                            (await UserManager.IsInRoleAsync(user, "View Only") ||
+                             await UserManager.IsInRoleAsync(user, "Admin")))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-page="/Contacts/Index">Contacts</a>
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-page="/Reports/PeopleReport" >
                                 Report

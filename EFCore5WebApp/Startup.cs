@@ -35,7 +35,11 @@ namespace EFCore5WebApp
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("connection")));
 
             services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<AppDbContext>();
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddTokenProvider<DataProtectorTokenProvider<IdentityUser>>(TokenOptions.DefaultProvider);
+            ;
+
 
             services.AddRazorPages();
             services.AddControllersWithViews();

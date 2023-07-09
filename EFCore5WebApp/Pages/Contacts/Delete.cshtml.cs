@@ -7,14 +7,20 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using EFCore5WebApp.Core.Entities;
 using EFCore5WebApp.DAL;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace EFCore5WebApp.Pages.Contacts
 {
-    public class DeleteModel : PageModel
+    [Authorize(Roles = PageAccessRoles.AdminOnly)]
+    public class DeleteModel : SecuredPageModel
     {
         private readonly EFCore5WebApp.DAL.AppDbContext _context;
 
-        public DeleteModel(EFCore5WebApp.DAL.AppDbContext context)
+        public DeleteModel(EFCore5WebApp.DAL.AppDbContext context,
+            SignInManager<IdentityUser> signInManager,
+            UserManager<IdentityUser> userManager) : base(context, signInManager, userManager)
         {
             _context = context;
         }
@@ -29,12 +35,14 @@ namespace EFCore5WebApp.Pages.Contacts
                 return NotFound();
             }
 
-            Person = await _context.Persons.Include(nameof(Person.Addresses)).FirstOrDefaultAsync(m => m.Id == id);
+            Person = await _context.Persons.Include(nameof(Person.Addresses))
+                .FirstOrDefaultAsync(m => m.Id == id);
 
             if (Person == null)
             {
                 return NotFound();
             }
+
             return Page();
         }
 
@@ -45,7 +53,8 @@ namespace EFCore5WebApp.Pages.Contacts
                 return NotFound();
             }
 
-            Person = await _context.Persons.Include(nameof(Person.Addresses)).SingleOrDefaultAsync(x => x.Id == id);
+            Person = await _context.Persons.Include(nameof(Person.Addresses))
+                .SingleOrDefaultAsync(x => x.Id == id);
 
             if (Person != null)
             {

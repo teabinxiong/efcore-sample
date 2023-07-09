@@ -8,14 +8,27 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EFCore5WebApp.Core.Entities;
 using EFCore5WebApp.DAL;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace EFCore5WebApp.Pages.Contacts
 {
-    public class EditModel : PageModel
+    [Authorize(Roles = PageAccessRoles.AdminOnly)]
+    public class EditModel : SecuredPageModel
     {
         private readonly EFCore5WebApp.DAL.AppDbContext _context;
 
-        public EditModel(EFCore5WebApp.DAL.AppDbContext context)
+        [BindProperty(SupportsGet = true)]
+        public List<SelectListItem> States { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public List<SelectListItem> Countries { get; set; }
+
+        public EditModel(
+            EFCore5WebApp.DAL.AppDbContext context,
+            SignInManager<IdentityUser> signInManager,
+            UserManager<IdentityUser> userManager) : base(context,signInManager, userManager)
         {
             _context = context;
         }
@@ -23,11 +36,6 @@ namespace EFCore5WebApp.Pages.Contacts
         [BindProperty]
         public Person Person { get; set; }
 
-        [BindProperty(SupportsGet = true)]
-        public List<SelectListItem> States { get; set; }
-
-        [BindProperty(SupportsGet = true)]
-        public List<SelectListItem> Countries { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -36,7 +44,8 @@ namespace EFCore5WebApp.Pages.Contacts
                 return NotFound();
             }
 
-            Person = await _context.Persons.Include("Addresses").FirstOrDefaultAsync(m => m.Id == id);
+            Person = await _context.Persons.Include("Addresses")
+                .FirstOrDefaultAsync(m => m.Id == id);
 
             if (Person == null)
             {
@@ -82,9 +91,6 @@ namespace EFCore5WebApp.Pages.Contacts
 
             if (!ModelState.IsValid)
             {
-                var errors = ModelState.Select(x => x.Value.Errors)
-                            .Where(y => y.Count > 0)
-                            .ToList();
                 return Page();
             }
            

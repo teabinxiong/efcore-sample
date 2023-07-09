@@ -1,5 +1,9 @@
 ﻿@page
+@using Microsoft.AspNetCore.Identity
 @model EFCore5WebApp.Pages.Contacts.DetailsModel
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 
 @{
     ViewData["Title"] = "Details";
@@ -47,7 +51,7 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Person.Addresses)
+                    @Html.DisplayNameFor(model => model.Person.Addresses.First().AddressLine1)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Person.Addresses.First().AddressLine2)
@@ -95,6 +99,9 @@
     </table>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Person.Id">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    @if (Model.IsAdminUser)
+    {
+        <a asp-page="./Edit" asp-route-id="@Model.Person.Id">Edit</a>
+    }
+    |<a asp-page="./Index">Back to List</a>
 </div>

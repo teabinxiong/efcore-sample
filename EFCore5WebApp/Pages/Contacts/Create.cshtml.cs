@@ -7,14 +7,27 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using EFCore5WebApp.Core.Entities;
 using EFCore5WebApp.DAL;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace EFCore5WebApp.Pages.Contacts
 {
-    public class CreateModel : PageModel
+    [Authorize(Roles = PageAccessRoles.AdminOnly)]
+    public class CreateModel : SecuredPageModel
     {
         private readonly EFCore5WebApp.DAL.AppDbContext _context;
 
-        public CreateModel(EFCore5WebApp.DAL.AppDbContext context)
+        [BindProperty(SupportsGet = true)]
+        public List<SelectListItem> States { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public List<SelectListItem> Countries { get; set; }
+
+        public CreateModel(EFCore5WebApp.DAL.AppDbContext context,
+            SignInManager<IdentityUser> signInManager,
+            UserManager<IdentityUser> userManager) : base(context,
+            signInManager, userManager)
         {
             _context = context;
         }
@@ -42,14 +55,6 @@ namespace EFCore5WebApp.Pages.Contacts
 
         [BindProperty(SupportsGet = true)]
         public Person Person { get; set; }
-
-        [BindProperty(SupportsGet = true)]
-        public List<SelectListItem> States { get; set; }
-
-        [BindProperty(SupportsGet = true)]
-        public List<SelectListItem> Countries { get; set; }
-
-
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
