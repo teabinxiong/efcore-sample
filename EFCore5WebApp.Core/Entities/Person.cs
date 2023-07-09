@@ -22,5 +22,7 @@ namespace EFCore5WebApp.Core.Entities
         [Required]
         public string EmailAddress { get; set; }
         public List<Address> Addresses { get; set; } = new List<Address>();
+
+        public DateTime CreatedOn { get; set; }
     }
 }
