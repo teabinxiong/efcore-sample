@@ -23,6 +23,9 @@ namespace EFCore5WebApp.Core.Entities
         public string EmailAddress { get; set; }
         public List<Address> Addresses { get; set; } = new List<Address>();
 
+        [NotMapped]
+        public string FullName => $"{FirstName} {LastName}";
+
         public DateTime CreatedOn { get; set; }
     }
 }

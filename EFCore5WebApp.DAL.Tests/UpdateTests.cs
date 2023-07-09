@@ -82,6 +82,14 @@ namespace EFCore5WebApp.DAL.Tests
             Assert.AreEqual(zipCode, updatedAddress.ZipCode);
             Assert.AreEqual(country, updatedAddress.Country);
         }
+
+        [TearDown]
+        public void TearDown()
+        {
+            var person = _context.Persons.Single(x => x.Id == _personId);
+            _context.Persons.Remove(person);
+            _context.SaveChanges();
+        }
     }
 }
 
