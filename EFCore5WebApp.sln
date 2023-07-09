@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCore5WebApp", "EFCore5WebApp\EFCore5WebApp.csproj", "{1158E565-B3C3-4E3B-A170-296EC7690866}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCore5WebApp", "EFCore5WebApp\EFCore5WebApp.csproj", "{1158E565-B3C3-4E3B-A170-296EC7690866}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCore5WebApp.Core", "EFCore5WebApp.Core\EFCore5WebApp.Core.csproj", "{98D368F0-4F1F-4E76-B434-2C08A51B1200}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCore5WebApp.Core", "EFCore5WebApp.Core\EFCore5WebApp.Core.csproj", "{98D368F0-4F1F-4E76-B434-2C08A51B1200}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCore5WebApp.Core.Tests", "EFCore5WebApp.Core.Tests\EFCore5WebApp.Core.Tests.csproj", "{06A3F4BB-5E8E-410A-995D-B47B18EA5741}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCore5WebApp.Core.Tests", "EFCore5WebApp.Core.Tests\EFCore5WebApp.Core.Tests.csproj", "{06A3F4BB-5E8E-410A-995D-B47B18EA5741}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCore5WebApp.DAL", "EFCore5WebApp.DAL\EFCore5WebApp.DAL.csproj", "{EC9185C3-07D8-49DE-AC6D-B960C3125F60}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCore5WebApp.DAL", "EFCore5WebApp.DAL\EFCore5WebApp.DAL.csproj", "{EC9185C3-07D8-49DE-AC6D-B960C3125F60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCore5WebApp.DAL.Tests", "EFCore5WebApp.DAL.Tests\EFCore5WebApp.DAL.Tests.csproj", "{1DC755F9-471D-4B8C-AD09-CCD6C38A6F20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCore5WebApp.DAL.Tests", "EFCore5WebApp.DAL.Tests\EFCore5WebApp.DAL.Tests.csproj", "{1DC755F9-471D-4B8C-AD09-CCD6C38A6F20}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

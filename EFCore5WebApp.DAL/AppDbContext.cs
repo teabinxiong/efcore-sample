@@ -84,8 +84,70 @@ namespace EFCore5WebApp.DAL
 
             modelBuilder.Entity<Person>().HasData(new List<Person>()
             {
-               new Person(){ Id = 1, FirstName = "John", LastName = "Smith",EmailAddress = "john@smith.com" , Age = 20},
-               new Person(){ Id = 2, FirstName = "Susan", LastName = "Jones",EmailAddress = "john@smith.com" ,Age = 30 }
+              new Person(){ Id = 1, FirstName = "John", LastName = "Smith",
+             EmailAddress = "john@smith.com", Age = 20 },
+              new Person(){ Id = 2, FirstName = "Susan", LastName = "Jones",
+             EmailAddress = "john@smith.com", Age = 30 },
+              new Person(){ Id = 3, FirstName = "Jane", LastName = "Foster",
+             EmailAddress = "john@smith.com", Age = 31 },
+              new Person(){ Id = 4, FirstName = "Burt", LastName = "Reynolds",
+             EmailAddress = "john@smith.com", Age = 32 },
+              new Person(){ Id = 5, FirstName = "Maisie", LastName = "Williams",
+             EmailAddress = "john@smith.com", Age = 33 },
+              new Person(){ Id = 6, FirstName = "Kit", LastName = "Harrington",
+             EmailAddress = "john@smith.com", Age = 34 },
+              new Person(){ Id = 7, FirstName = "Sophie", LastName = "Turner",
+             EmailAddress = "john@smith.com", Age = 35 },
+              new Person(){ Id = 8, FirstName = "Lena", LastName = "Headey",
+             EmailAddress = "john@smith.com", Age = 36 },
+              new Person(){ Id = 9, FirstName = "Peter", LastName = "Dinklage",
+             EmailAddress = "john@smith.com", Age = 37 },
+              new Person(){ Id = 10, FirstName = "Nikolaj", LastName = "Coster-Waldau", 
+             EmailAddress = "john@smith.com", Age = 38 },
+              new Person(){ Id = 11, FirstName = "Gwendoline", LastName = "Christie",
+             EmailAddress = "john@smith.com", Age = 39 },
+              new Person(){ Id = 12, FirstName = "Isac", LastName = "Hempstead",
+             EmailAddress = "john@smith.com", Age = 40 },
+              new Person(){ Id = 13, FirstName = "Iain", LastName = "Glen",
+             EmailAddress = "john@smith.com", Age = 20 },
+              new Person(){ Id = 14, FirstName = "Alfie", LastName = "Allen",
+             EmailAddress = "john@smith.com", Age = 21 },
+              new Person(){ Id = 15, FirstName = "Nathalie", LastName = "Emmanuel",
+             EmailAddress = "john@smith.com", Age = 22 },
+              new Person(){ Id = 16, FirstName = "Carice", LastName = "van Houten",
+             EmailAddress = "john@smith.com", Age = 23 },
+              new Person(){ Id = 17, FirstName = "Conleth", LastName = "Hil",
+             EmailAddress = "john@smith.com", Age = 24 },
+              new Person(){ Id = 18, FirstName = "John", LastName = "Bradley",
+             EmailAddress = "john@smith.com", Age = 25 },
+              new Person(){ Id = 19, FirstName = "Liam", LastName = "Cunningham",
+             EmailAddress = "john@smith.com", Age = 26 },
+              new Person(){ Id = 20, FirstName = "Aidan", LastName = "Gillen",
+             EmailAddress = "john@smith.com", Age = 27 },
+              new Person(){ Id = 21, FirstName = "Jason", LastName = "Mamoa",
+             EmailAddress = "john@smith.com", Age = 28 },
+              new Person(){ Id = 22, FirstName = "Natalie", LastName = "Dormer",
+             EmailAddress = "john@smith.com", Age = 29 },
+              new Person(){ Id = 23, FirstName = "Richard", LastName = "Madden",
+             EmailAddress = "john@smith.com", Age = 30 },
+              new Person(){ Id = 24, FirstName = "Rosie", LastName = "Leslie",
+             EmailAddress = "john@smith.com", Age = 31 },
+              new Person(){ Id = 25, FirstName = "Jerome", LastName = "Flynn",
+             EmailAddress = "john@smith.com", Age = 32 },
+              new Person(){ Id = 26, FirstName = "Kristofer", LastName = "Hivju",
+             EmailAddress = "john@smith.com", Age = 33 },
+              new Person(){ Id = 27, FirstName = "Jacob", LastName = "Anderson",
+             EmailAddress = "john@smith.com", Age = 34 },
+              new Person(){ Id = 28, FirstName = "Jack", LastName = "Gleeson",
+             EmailAddress = "john@smith.com", Age = 35 },
+              new Person(){ Id = 29, FirstName = "Hannah", LastName = "Murray",
+             EmailAddress = "john@smith.com", Age = 36 },
+              new Person(){ Id = 30, FirstName = "Sean", LastName = "Bean",
+             EmailAddress = "john@smith.com", Age = 37 },
+              new Person(){ Id = 31, FirstName = "Charles", LastName = "Dance",
+             EmailAddress = "john@smith.com", Age = 38 },
+              new Person(){ Id = 32, FirstName = "Michelle", LastName = "Fairley",
+             EmailAddress = "john@smith.com", Age = 39 },
             });
 
 
@@ -104,7 +166,7 @@ namespace EFCore5WebApp.DAL
                     .OnDelete(DeleteBehavior.Cascade);
             });
 
-            
+
         }
     }
 }
