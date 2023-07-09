@@ -21,11 +21,35 @@ namespace EFCore5WebApp.Pages.Contacts
 
         public IActionResult OnGet()
         {
+            Person.Addresses.Add(new Address());
+
+            States = _context.LookUps.Where(x => x.LookUpType == LookUpType.State)
+                .Select(x => new SelectListItem { Text = x.Description, Value = x.Code }).ToList();
+
+            Countries = _context.LookUps.Where(x => x.LookUpType == LookUpType.Country)
+                .Select(x => new SelectListItem
+                {
+                    Text = x.Description,
+                    Value = x.Code
+                }).ToList();
+
+            States.Insert(0, new SelectListItem { Text = "Select an item" , Value = string.Empty});
+
+            Countries.Insert(0, new SelectListItem { Text = "Select an item", Value = string.Empty });
+
             return Page();
         }
 
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public Person Person { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public List<SelectListItem> States { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public List<SelectListItem> Countries { get; set; }
+
+
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
@@ -36,6 +60,7 @@ namespace EFCore5WebApp.Pages.Contacts
                 return Page();
             }
 
+            Person.CreatedOn = DateTime.Now;
             _context.Persons.Add(Person);
             await _context.SaveChangesAsync();
 
