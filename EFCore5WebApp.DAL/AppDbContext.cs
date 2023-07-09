@@ -1,4 +1,5 @@
 ﻿using EFCore5WebApp.Core.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace EFCore5WebApp.DAL
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext
     {
         public DbSet<Person> Persons { get; set; }
         public DbSet<Address> Addresses { get; set; }
@@ -23,6 +24,7 @@ namespace EFCore5WebApp.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<LookUp>().HasData(new List<LookUp>()
              {
                 new LookUp() { Code = "AL", Description = "Alabama", LookUpType = LookUpType.State},
@@ -101,6 +103,8 @@ namespace EFCore5WebApp.DAL
                 .HasForeignKey(x => x.PersonId)
                     .OnDelete(DeleteBehavior.Cascade);
             });
+
+            
         }
     }
 }
